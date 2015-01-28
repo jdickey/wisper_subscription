@@ -1,5 +1,7 @@
 # WisperSubscription
 
+[![Join the chat at https://gitter.im/jdickey/wisper_subscription](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jdickey/wisper_subscription?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This Gem contains a class, `WisperSubscription`, which encapsulates an extremly
 simple container to record call parameters for messages, and query methods for
 whether a defined message was sent. This is a refinement of a class
