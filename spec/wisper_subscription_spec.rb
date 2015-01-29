@@ -102,4 +102,18 @@ describe WisperSubscription do
       end
     end # describe 'returns the payload(s) received for the ... message when'
   end # describe '#payload_for'
+
+  describe '#respond_to?' do
+    it 'returns true for any query method' do
+      expect(obj).to respond_to :is_that_right?
+      expect(obj).to respond_to :you_dont_say?
+      expect(obj).to respond_to :all_tone_here?
+    end
+
+    it 'returns false for any other undefined method' do
+      expect(obj).not_to respond_to :taunts
+      expect(obj).not_to respond_to :threats
+      expect(obj).not_to respond_to :anything
+    end
+  end # describe '#respond_to?'
 end
