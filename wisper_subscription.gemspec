@@ -23,6 +23,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'rubocop', '>= 0.28.0'
   spec.add_development_dependency 'simplecov', '>= 0.9.1'
+  spec.add_development_dependency 'awesome_print'
+  spec.add_development_dependency 'pry-byebug'
+  spec.add_development_dependency 'pry-doc'
 
   spec.description   = %q{May be used to subscribe to Wisper broadcasts, or other
 similar mechanisms. Define what messages you want an instance to respond to and,

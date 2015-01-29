@@ -116,4 +116,17 @@ describe WisperSubscription do
       expect(obj).not_to respond_to :anything
     end
   end # describe '#respond_to?'
+
+  describe '.method_missing' do
+    it 'causes an unknown query method to return false' do
+      expect(obj).not_to be_success
+      expect(obj).not_to be_real
+      expect(obj).not_to be_anything_in_particular
+    end
+
+    it 'raises a NoMethodError for any other undefined method' do
+      message = Regexp.new 'undefined method `bogus\' for'
+      expect { obj.bogus }.to raise_error NoMethodError, message
+    end
+  end # describe '.method_missing'
 end
