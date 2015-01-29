@@ -6,6 +6,7 @@ class WisperSubscription
   def initialize
     @internals = {}
     @empty_payload = []
+    @query_pattern = /^.*\?$/
   end
 
   def define_message(message)
@@ -21,14 +22,19 @@ class WisperSubscription
     @internals[message]
   end
 
+  def method_missing(method_sym, *arguments, &block)
+    return false if method_sym.to_s =~ query_pattern
+    super
+  end
+
   def respond_to?(symbol, include_all = false)
-    return true if symbol.to_s =~ /^.*\?$/
+    return true if symbol.to_s =~ query_pattern
     super
   end
 
   private
 
-  attr_reader :empty_payload
+  attr_reader :empty_payload, :query_pattern
 
   def add_internals_entry
     @internals[@message.to_sym] = []
@@ -38,7 +44,7 @@ class WisperSubscription
   def add_query_method
     message = @message
     define_singleton_method "#{@message}?".to_sym do
-      @internals[message].to_a.empty?
+      !@internals[message].to_a.empty?
     end
     self
   end
