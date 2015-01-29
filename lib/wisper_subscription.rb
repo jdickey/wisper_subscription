@@ -21,6 +21,11 @@ class WisperSubscription
     @internals[message]
   end
 
+  def respond_to?(symbol, include_all = false)
+    return true if symbol.to_s =~ /^.*\?$/
+    super
+  end
+
   private
 
   attr_reader :empty_payload
