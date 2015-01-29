@@ -66,4 +66,19 @@ describe WisperSubscription do
       end
     end # describe 'adds a new'
   end # describe '#define_message'
+
+  describe '#payload_for' do
+    it 'takes a single parameter' do
+      method = obj.method :payload_for
+      expect(method.arity).to eq 1
+    end
+
+    describe 'returns a no-payloads-received indicator when' do
+      let(:none_received) { nil }
+
+      it 'no messages have been defined' do
+        expect(obj.payload_for message).to eq none_received
+      end
+    end # describe 'returns a no-payloads-received indicator when'
+  end # describe '#payload_for'
 end

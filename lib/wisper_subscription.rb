@@ -5,6 +5,7 @@ require 'wisper_subscription/version'
 class WisperSubscription
   def initialize
     @internals = {}
+    @empty_payload = nil
   end
 
   def define_message(message)
@@ -15,7 +16,14 @@ class WisperSubscription
     self
   end
 
+  def payload_for(message)
+    return empty_payload unless @internals.key? message
+    @internals[message]
+  end
+
   private
+
+  attr_reader :empty_payload
 
   def add_internals_entry
     @internals[@message.to_sym] = []
