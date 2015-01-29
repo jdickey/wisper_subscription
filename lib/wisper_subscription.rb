@@ -5,7 +5,7 @@ require 'wisper_subscription/version'
 class WisperSubscription
   def initialize
     @internals = {}
-    @empty_payload = nil
+    @empty_payload = []
   end
 
   def define_message(message)
