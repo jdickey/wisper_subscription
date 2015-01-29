@@ -2,6 +2,7 @@
 
 [![Join the chat at https://gitter.im/jdickey/wisper_subscription](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jdickey/wisper_subscription?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Gem Version](https://badge.fury.io/rb/wisper_subscription.svg)](http://badge.fury.io/rb/wisper_subscription)
 [![Code Climate](https://codeclimate.com/github/jdickey/wisper_subscription.png)](https://codeclimate.com/github/jdickey/wisper_subscription)
 [ ![Codeship Status for jdickey/wisper_subscription](https://codeship.com/projects/2e3dfaa0-8950-0132-3d83-4e5a44c3ddcb/status?branch=master)](https://codeship.com/projects/59675)
 [![security](https://hakiri.io/github/jdickey/wisper_subscription/master.svg)](https://hakiri.io/github/jdickey/wisper_subscription/master)
