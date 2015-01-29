@@ -4,6 +4,7 @@ require 'spec_helper'
 describe WisperSubscription do
   let(:obj) { described_class.new }
   let(:message) { :foo }
+  let(:other_message) { :bar }
 
   it 'has a version number' do
     expect(WisperSubscription::VERSION).not_to be nil
@@ -66,4 +67,39 @@ describe WisperSubscription do
       end
     end # describe 'adds a new'
   end # describe '#define_message'
+
+  describe '#payload_for' do
+    it 'takes a single parameter' do
+      method = obj.method :payload_for
+      expect(method.arity).to eq 1
+    end
+
+    describe 'returns a no-payloads-received indicator when' do
+      let(:none_received) { [] }
+
+      after :each do
+        expect(obj.payload_for message).to eq none_received
+      end
+
+      it 'no messages have been defined' do
+      end
+
+      it 'other messages have been defined but this message has not been' do
+        obj.define_message other_message
+      end
+
+      it 'the specified message has been defined but not received' do
+        obj.define_message message
+      end
+    end # describe 'returns a no-payloads-received indicator when'
+
+    describe 'returns the payload(s) received for the specified message when' do
+      it 'payloads for that message have been stored' do
+        obj.define_message message
+        expected = 'testing'
+        obj.instance_variable_get(:@internals)[message].push expected
+        expect(obj.payload_for message).to eq Array.new([expected])
+      end
+    end # describe 'returns the payload(s) received for the ... message when'
+  end # describe '#payload_for'
 end
