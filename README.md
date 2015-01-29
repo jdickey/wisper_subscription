@@ -5,7 +5,6 @@
 [![Code Climate](https://codeclimate.com/github/jdickey/wisper_subscription.png)](https://codeclimate.com/github/jdickey/wisper_subscription)
 [ ![Codeship Status for jdickey/wisper_subscription](https://codeship.com/projects/2e3dfaa0-8950-0132-3d83-4e5a44c3ddcb/status?branch=master)](https://codeship.com/projects/59675)
 [![security](https://hakiri.io/github/jdickey/wisper_subscription/master.svg)](https://hakiri.io/github/jdickey/wisper_subscription/master)
-[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/jdickey/wisper_subscription/issues)
 [![Dependency Status](https://gemnasium.com/jdickey/wisper_subscription.svg)](https://gemnasium.com/jdickey/wisper_subscription)
 
 This Gem contains a class, `WisperSubscription`, which encapsulates an extremly
