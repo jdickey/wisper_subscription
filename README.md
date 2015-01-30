@@ -54,21 +54,76 @@ describe SomeWisperPublishingClass do
   before :each do
     # some setup
     subscriber.define_message :success
-    subscriber.define_Message :failure
+    subscriber.define_message :failure
     command.subscribe subscriber
     command.do_something_that_broadcasts_a_success
   end
 
   it 'was successful' do
-    payload = subscriber.payload_for(:success).to_a.first
-    expect(payload).to be_a WhatYouExpectOnSuccess # as opposed to nil
+    payload = subscriber.payload_for(:success, 0)
+    expect(payload.first).to be_a WhatYouExpectOnSuccess # as opposed to nil
   end
 
   # ...
 end
 ```
 
-You get the idea. If not, open an issue or ask on our Gitter channel.
+You get the idea. If not, open an issue or ask on our
+[Gitter channel](https://gitter.im/jdickey/wisper_subscription).
+
+### Methods
+
+#### `initialize`
+
+Parameters: none.
+
+Initialises instance internal state.
+
+#### `define_message(message)`
+
+Parameters:
+
+1. `message` (a Symbol; e.g., `:bangbang`)
+
+Returns: `self`
+
+Defines a *listener method* (e.g., `#bangbang`) to receive events published by a
+[Wisper publisher](https://github.com/krisleech/wisper/#publishing) or similar
+mechaism. Any parameters a listener method is called with will be retreivaable
+by using the `#payload_for` or `#payloads_for` methods (see below).
+
+Defines a query method (e.g., `#bangbang?`) which returns `true` if payloads for
+the message have been received; `false` otherwise.
+
+#### `payloads_for(message)`
+
+Parameters:
+
+1. `message` (a Symbol, e.g., `:bangbang`)
+
+Returns: an Array
+
+Returns an Array of all *payloads* received by the listener method corresponding
+to the parameter. If no calls to the listener method have been made, *or* if the
+listener method has not been defined because `#define_message` has not been
+called using that `message`, then an empty Array is returned.
+
+#### `payload_for(message, index = 0)`
+
+Parameters:
+
+1. `message` (a Symbol, e.g., `:bangbang`)
+1. `index` (an integer, defaulting to 0)
+
+Returns: an Array or `nil`
+
+Returns an Array containing the *payload* received by the `index`th invocation
+of the listener method (zero-based). A *payload* is simply the set of (zero or)
+more) parameters sent to the listener method. If no calls to the listener method
+have been made, *or* if the listener method has not been defined because
+`#define_message` has not been called using that `message`, then this method
+returns `nil`. If the listener method *has* been defined but the specified index
+is outside the range of received payloads, then returns an empty Array.
 
 ## Contributing
 

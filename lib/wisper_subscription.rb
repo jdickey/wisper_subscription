@@ -1,6 +1,8 @@
 
 require 'wisper_subscription/version'
 
+require 'awesome_print'
+
 # Collects and reports on messages sent to an instance.
 class WisperSubscription
   def initialize
@@ -13,11 +15,16 @@ class WisperSubscription
     @message = message
     add_internals_entry
     add_query_method
-    add_responder_method
+    add_listener_method
     self
   end
 
-  def payload_for(message)
+  def payload_for(message, index = 0)
+    return nil unless @internals.key? message
+    payloads_for(message)[index]
+  end
+
+  def payloads_for(message)
     return empty_payload unless @internals.key? message
     @internals[message]
   end
@@ -49,7 +56,7 @@ class WisperSubscription
     self
   end
 
-  def add_responder_method
+  def add_listener_method
     message = @message
     define_singleton_method @message.to_sym do |*params|
       @internals[message].push params
